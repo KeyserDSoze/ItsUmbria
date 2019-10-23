@@ -28,15 +28,6 @@ namespace ItsUmbria
                     Console.ReadLine();
                 }
             }
-           
-
-            
-            //IPerimeterable perimeterable = new IsosceleTriangle();
-            //perimeterable.CalculatePerimeter();
-            //IAreable areable = new IsosceleTriangle();
-            //areable.CalculateArea();
-            //ILineable line = new Line();
-            //line.CalculateLine();
         }
         static void Run()
         {
