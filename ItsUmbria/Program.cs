@@ -29,16 +29,5 @@ namespace ItsUmbria
                 }
             }
         }
-        static void Run()
-        {
-            Animal animal = new Horse()
-            {
-                Name = "Loud"
-            };
-            Console.WriteLine(animal.Name);
-            IRunnable runner = animal as IRunnable;
-            if (runner != null)
-                runner.Run();
-        }
     }
 }
