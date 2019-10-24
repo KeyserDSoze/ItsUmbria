@@ -5,4 +5,14 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Junk\**" />
+    <EmbeddedResource Remove="Junk\**" />
+    <None Remove="Junk\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CarChain\" />
+  </ItemGroup>
+
 </Project>

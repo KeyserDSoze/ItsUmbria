@@ -6,24 +6,53 @@ namespace ItsUmbria.CSharp
 {
     public class House
     {
-        public int NumberOfDoors { get; set; }
-        public int NumberOfWindows { get; set; }
+        public static int X = 20;
+        public int Y = 20;
+        public int NumberOfDoors { get; }
+        public int NumberOfWindows { get; }
         public int NumberOfSolarPanels { get; set; }
-        private int NumberOfBathroom;
-        private int NumberOfBedroom;
+        private int NumberOfBathrooms;
+        private int NumberOfBedrooms;
         public House(int numberOfDoors, int numberOfWindows, int numberOfBathroom, int numberOfBedroom, int numberOfSolarPanels)
         {
             this.NumberOfDoors = numberOfDoors;
             this.NumberOfWindows = numberOfWindows;
-            this.NumberOfBathroom = numberOfBathroom;
-            this.NumberOfBedroom = numberOfBedroom;
+            this.NumberOfBathrooms = numberOfBathroom;
+            this.NumberOfBedrooms = numberOfBedroom;
             this.NumberOfSolarPanels = numberOfSolarPanels;
         }
         public double ProduceEnergy()
         {
-            Console.WriteLine($"Produce {(this.NumberOfSolarPanels * 20)} KW/H of electrical energy.");
-            return this.NumberOfSolarPanels * 20;
+            Console.WriteLine($"Produce {(this.NumberOfSolarPanels * 20)} KWH of electrical energy.");
+            return this.NumberOfSolarPanels * X;
         }
+        public EnergyClass EnergyClass
+        {
+            get
+            {
+                double producedEnergy = this.ProduceEnergy();
+                if (producedEnergy >= 100)
+                {
+                    return EnergyClass.A;
+                }
+                else if (producedEnergy >= 50)
+                {
+                    return EnergyClass.B;
+                }
+                else
+                {
+                    return EnergyClass.C;
+                }
+            }
+        }
+    }
+    public enum EnergyClass
+    {
+        A,
+        B,
+        C,
+        D,
+        E
     }
     public class BuildAnHouse : ITest
     {
