@@ -7,6 +7,7 @@ namespace ItsUmbria.CarFactory
     public abstract class CarModel
     {
         public string Targa { get; }
+        public string Color { get; internal set; }
         public CarModel(string targa) => this.Targa = targa;
     }
 }
