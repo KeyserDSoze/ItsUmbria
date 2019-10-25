@@ -27,9 +27,9 @@ namespace ItsUmbria.CSharp
             List<IHerbivore> herbivores = new List<IHerbivore>();
             herbivores.Add(new Animal());
             herbivores.Add(new Animal());
-            foreach (IHerbivore animal in animals)
+            foreach (IHerbivore herbivore in herbivores)
             {
-                Console.WriteLine(animal);
+                Console.WriteLine(herbivore);
             }
         }
     }
