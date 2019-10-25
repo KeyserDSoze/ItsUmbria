@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ItsUmbria.CarFactory
 {
-    public class Sportive : ICarModel
+    public class Sportive : CarModel
     {
+        public Sportive(string targa) : base(targa)
+        {
+        }
     }
 }

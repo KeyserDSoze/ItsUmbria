@@ -4,7 +4,10 @@ using System.Text;
 
 namespace ItsUmbria.CarFactory
 {
-    public class Suv : ICarModel
+    public class Suv : CarModel
     {
+        public Suv(string targa) : base(targa)
+        {
+        }
     }
 }

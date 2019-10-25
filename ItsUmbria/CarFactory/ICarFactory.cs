@@ -6,6 +6,6 @@ namespace ItsUmbria.CarFactory
 {
     public interface ICarFactory
     {
-        ICarModel CreateCar(CarType carType);
+        CarModel CreateCar(CarType carType);
     }
 }
