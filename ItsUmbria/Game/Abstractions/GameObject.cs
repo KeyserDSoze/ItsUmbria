@@ -1,0 +1,24 @@
+﻿using System;
+using System.Linq;
+using System.Text;
+
+namespace ItsUmbria.Game.Abstractions
+{
+    public abstract class GameObject
+    {
+        public string Type => this.GetType().Name;
+        public abstract string Name { get; }
+        public Vector Position { get; set; } = new Vector(0, 0);
+        public abstract void Print();
+    }
+    public struct Vector
+    {
+        public Vector(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+        public double X { get; }
+        public double Y { get; }
+    }
+}
