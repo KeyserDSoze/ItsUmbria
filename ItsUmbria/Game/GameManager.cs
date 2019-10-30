@@ -9,7 +9,7 @@ namespace ItsUmbria.Fps
     {
         public void Do()
         {
-            Game.Heroes.Hero hero = Level.GetInstance().GetHero("Solid Snake", Game.Heroes.HeroClass.Damage);
+            TrainingRoom.GetInstance().GetHero("Solid Snake", Game.Heroes.HeroClass.Damage).Print();
         }
     }
 }

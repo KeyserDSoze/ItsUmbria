@@ -9,10 +9,5 @@ namespace ItsUmbria.Game.Heroes
             Name = name;
         }
         public override string Name { get; }
-
-        public override void Print()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

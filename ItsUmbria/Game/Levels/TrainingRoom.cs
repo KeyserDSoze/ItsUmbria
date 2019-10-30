@@ -7,19 +7,19 @@ using System.Text;
 
 namespace ItsUmbria.Game.Levels
 {
-    public class Level
+    public class TrainingRoom
     {
         private static readonly HeroFactory heroFactory = new HeroFactory();
-        private static Level instance = null;
-        public static Level GetInstance()
+        private static TrainingRoom instance = null;
+        public static TrainingRoom GetInstance()
         {
-            if (instance != null)
+            if (instance == null)
             {
-                instance = new Level();
+                instance = new TrainingRoom();
             }
             return instance;
         }
-        private Dictionary<string, Hero> heroesInGame = new Dictionary<string, Hero>();
+        private readonly Dictionary<string, Hero> heroesInGame = new Dictionary<string, Hero>();
         public Hero GetHero(string name, HeroClass heroClass)
         {
             if (!heroesInGame.TryGetValue(name, out Hero hero))

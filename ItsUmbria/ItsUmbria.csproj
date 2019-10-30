@@ -7,11 +7,8 @@
 
   <ItemGroup>
     <Compile Remove="FlyWeight\**" />
-    <Compile Remove="Game\**" />
     <EmbeddedResource Remove="FlyWeight\**" />
-    <EmbeddedResource Remove="Game\**" />
     <None Remove="FlyWeight\**" />
-    <None Remove="Game\**" />
   </ItemGroup>
 
 </Project>

@@ -9,7 +9,7 @@ namespace ItsUmbria.Game.Abstractions
         public string Type => this.GetType().Name;
         public abstract string Name { get; }
         public Vector Position { get; set; } = new Vector(0, 0);
-        public abstract void Print();
+        public virtual void Print() => Console.WriteLine($"Object Name:{this.Name}");
     }
     public struct Vector
     {
@@ -21,4 +21,5 @@ namespace ItsUmbria.Game.Abstractions
         public double X { get; }
         public double Y { get; }
     }
+    
 }

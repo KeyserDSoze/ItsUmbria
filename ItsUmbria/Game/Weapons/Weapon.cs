@@ -5,7 +5,7 @@ namespace ItsUmbria.Game.Weapons
     public abstract class Weapon : GameObject
     {
         public int Damage { get; set; }
-        public int Ammo { get; set; } = 10;
+        public virtual int Ammo { get; set; } = 100;
 
         public void AddAmmo(int ammo)
         {
