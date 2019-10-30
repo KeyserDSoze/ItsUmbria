@@ -13,14 +13,9 @@ namespace ItsUmbria.Printer
             string key = character + color.ToString();
             if (!usedCharacters.ContainsKey(key))
             {
-                ColoredCharacter coloredCharacter = new ColoredCharacter(character, color);
-                usedCharacters.Add(key, coloredCharacter);
-                return coloredCharacter;
+                usedCharacters.Add(key, new ColoredCharacter(character, color));
             }
-            else
-            {
-                return usedCharacters[key];
-            }
+            return usedCharacters[key];
         }
         public ColoredCharacter Get() => this.Get(' ', ConsoleColor.White);
         public List<ColoredCharacter> GetWord(string word, ConsoleColor color)
