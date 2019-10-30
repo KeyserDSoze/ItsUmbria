@@ -6,16 +6,6 @@ namespace ItsUmbria.Game.Abstractions
 {
     public abstract class GameObject
     {
-        //protected GameObject(string name) : this(name, Vector.Zero)
-        //{
-        //}
-
-        //protected GameObject(string name, Vector position)
-        //{
-        //    Name = name;
-        //    Position = position;
-        //}
-
         public string Type => this.GetType().Name;
         public virtual string Name { get; }
         public Vector Position { get; set; } = new Vector(0, 0);
