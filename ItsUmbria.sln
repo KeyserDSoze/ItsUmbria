@@ -5,7 +5,15 @@ VisualStudioVersion = 16.0.29403.142
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ItsUmbria", "ItsUmbria\ItsUmbria.csproj", "{19F1C0D4-3CE0-418F-96D4-FC5BDC666BAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineGame", "OnlineGame\OnlineGame.csproj", "{D9548A79-5A47-4EA3-B9E4-2CDE75E67039}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItsUmbria.Library.OnlineGame", "ItsUmbria.Library.OnlineGame\ItsUmbria.Library.OnlineGame.csproj", "{55A5D82D-4925-4E68-B084-647867186D88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItsUmbria.ConsoleApp", "ItsUmbria.ConsoleApp", "{0030A8B8-AF97-4803-A6FF-239C1D0F23FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItsUmbria.Library", "ItsUmbria.Library", "{E442035D-7A3A-4A8C-81EC-E943ABBD6214}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ItsUmbria.WebApp", "ItsUmbria.WebApp", "{C45FA8D8-6414-4561-932C-C326AABBF805}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItsUmbria.WebApp.OnlineGame", "ItsUmbria.WebApp.OnlineGame\ItsUmbria.WebApp.OnlineGame.csproj", "{578D25CE-C1F3-4E43-A922-8DE91EB98E45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,13 +25,22 @@ Global
 		{19F1C0D4-3CE0-418F-96D4-FC5BDC666BAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1C0D4-3CE0-418F-96D4-FC5BDC666BAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19F1C0D4-3CE0-418F-96D4-FC5BDC666BAF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9548A79-5A47-4EA3-B9E4-2CDE75E67039}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9548A79-5A47-4EA3-B9E4-2CDE75E67039}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9548A79-5A47-4EA3-B9E4-2CDE75E67039}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9548A79-5A47-4EA3-B9E4-2CDE75E67039}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A5D82D-4925-4E68-B084-647867186D88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A5D82D-4925-4E68-B084-647867186D88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A5D82D-4925-4E68-B084-647867186D88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A5D82D-4925-4E68-B084-647867186D88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{578D25CE-C1F3-4E43-A922-8DE91EB98E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{578D25CE-C1F3-4E43-A922-8DE91EB98E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{578D25CE-C1F3-4E43-A922-8DE91EB98E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{578D25CE-C1F3-4E43-A922-8DE91EB98E45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{19F1C0D4-3CE0-418F-96D4-FC5BDC666BAF} = {0030A8B8-AF97-4803-A6FF-239C1D0F23FE}
+		{55A5D82D-4925-4E68-B084-647867186D88} = {E442035D-7A3A-4A8C-81EC-E943ABBD6214}
+		{578D25CE-C1F3-4E43-A922-8DE91EB98E45} = {C45FA8D8-6414-4561-932C-C326AABBF805}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C53763FC-6F55-4D24-B514-76FF90E53AFA}
