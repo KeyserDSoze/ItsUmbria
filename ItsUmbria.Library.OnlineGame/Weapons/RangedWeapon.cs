@@ -12,7 +12,7 @@ namespace ItsUmbria.Library.OnlineGame.Weapons
         public override abstract int Range { get; }
         public int Ammo { get; protected set; }
         public abstract int AmmoConsumption { get; }
-        public override bool Attack(GameObject target)
+        public override bool Attack(RigidBody target)
         {
             if (Ammo > 0)
             {

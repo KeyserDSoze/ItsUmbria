@@ -5,15 +5,15 @@ using System;
 
 namespace ItsUmbria.Library.OnlineGame.Weapons
 {
-    public abstract class Weapon : GameObject, IAttacking
+    public abstract class Weapon : RigidBody, IAttacking
     {
-        public Weapon(WeaponType weaponType) => WeaponType = weaponType;
+        public Weapon(WeaponType weaponType) : base(weaponType.ToString()) => WeaponType = weaponType;
         public WeaponType WeaponType { get; }
         public abstract int MaxDamage { get; }
         public abstract int MinDamage { get; }
         public virtual int Range { get; } = 1;
         public abstract int AccuracyPercentage { get; }
-        public virtual bool Attack(GameObject target)
+        public virtual bool Attack(RigidBody target)
         {
             Random random = new Random((int)DateTime.UtcNow.Ticks);
             double targetDistance = (int)GetTargetDistance(target);
@@ -31,6 +31,6 @@ namespace ItsUmbria.Library.OnlineGame.Weapons
             }
             return false;
         }
-        private double GetTargetDistance(GameObject target) => this.Position.Distance(target.Position).Magnitude;
+        private double GetTargetDistance(RigidBody target) => this.Position.Distance(target.Position).Magnitude;
     }
 }

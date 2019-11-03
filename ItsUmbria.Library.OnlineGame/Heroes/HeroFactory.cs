@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ItsUmbria.Library.OnlineGame.Heroes
 {
-    class HeroFactory
+    public class HeroFactory
     {
         public Hero Create(HeroClass heroClass, string Name)
         {

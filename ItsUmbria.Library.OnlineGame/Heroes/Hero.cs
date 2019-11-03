@@ -7,26 +7,31 @@ using System.Linq;
 
 namespace ItsUmbria.Library.OnlineGame.Heroes
 {
-    #region Heroes
-    public abstract class Hero : GameObject, IAttacking, IMovable, IPrintable
+    public abstract class Hero : RigidBody, IAttacking, IMovable, IPrintable, ISpecial, IDamageable, IHealable, ITurnable
     {
-        private static readonly WeaponFactory weaponFactory = new WeaponFactory();
         public Weapon EquippedWeapon => this.Inventory.LastOrDefault().Value;
-        public Hero(string name, HeroClass heroClass)
+        public Hero(string name, HeroClass heroClass) : base(name)
         {
             Health = MaxHealth;
-            Name = name;
             Class = heroClass;
+            RestoreActions();
         }
         public HeroClass Class { get; }
         public int Health { get; private set; }
         public abstract int MaxHealth { get; }
         public abstract double Speed { get; }
+        public int PendingActions { get; private set; }
+        public virtual int ActionsPerTurn => 2;
+
         // Flyweight
-        public Dictionary<WeaponType, Weapon> Inventory { get; } = new Dictionary<WeaponType, Weapon>() { { WeaponType.Melee, new Knife() }};
+        public Dictionary<WeaponType, Weapon> Inventory { get; } = new Dictionary<WeaponType, Weapon>()
+        {
+            { WeaponType.Gun, new Socom() },
+            { WeaponType.Melee, new Knife() }
+        };
         public int CurrentCooldown { get; private set; } = 0;
         public abstract int Cooldown { get; }
-        public void PickWeapon(Weapon weaponToEquip)
+        public Weapon PickWeapon(Weapon weaponToEquip)
         {
             if (!Inventory.TryGetValue(weaponToEquip.WeaponType, out Weapon weapon))
             {
@@ -36,22 +41,24 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
             { 
                 if(weapon is IRanged rangedWeapon) rangedWeapon.Reload(10);
             }
+            return weapon;
         }
-        public void DropWeapon(WeaponType weaponType)
+        public bool DropWeapon(WeaponType weaponType)
         {
-            if (Inventory.ContainsKey(weaponType)) Inventory.Remove(weaponType);
+            if (Inventory.ContainsKey(weaponType)) return Inventory.Remove(weaponType);
+            else return false;
         }
         // ritorna true se è morto
-        internal bool GetDamage(int damage)
+        public bool GetDamage(int damage)
         {
             Health -= damage;
             return Health <= 0;
         }
-        internal void GetHealing(int heal)
+        public void GetHealing(int heal)
         {
             Health = Health + heal >= MaxHealth ? MaxHealth : Health + heal;
         }
-        public bool Attack(GameObject target)
+        public bool Attack(RigidBody target)
         {
             return this.EquippedWeapon.Attack(target);
         }
@@ -60,23 +67,27 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
             Console.WriteLine($"Name:{this.Name} - Healt:{this.Health}");
             Console.WriteLine($"Equip:{this.EquippedWeapon.Name} - Ammo:{(this.EquippedWeapon is RangedWeapon rangedWeapon ? rangedWeapon.Ammo.ToString() : "-")}\n");
         }
-        public override void Move(Vector vector)
+        public override bool Move(Vector vector)
         {
             if (this.Position.Distance(vector).Magnitude > Speed)
             {
-                vector -= vector - this.Position;
+                return false;
             }
-            base.Move(vector);
-            foreach (GameObject item in Inventory.Values)
+            if (base.Move(vector))
             {
-                item.Position = this.Position;
+                foreach (RigidBody item in Inventory.Values)
+                {
+                    item.Position = this.Position;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
-        public void DecreaseCoolDown()
-        {
-            if(Cooldown > 0) CurrentCooldown--;
-        }
-        public bool TrySpecialAbility(GameObject target, int intensity)
+        protected abstract bool DoSpecialAbility(RigidBody target, int intensity);
+        public bool TrySpecialAbility(RigidBody target, int intensity)
         {
             if (CurrentCooldown == 0)
             {
@@ -85,7 +96,37 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
             }
             return false;
         }
-        protected abstract bool DoSpecialAbility(GameObject target, int intensity);
+        public void DecreaseCoolDownIfNeeded()
+        {
+            if (Cooldown > 0) CurrentCooldown--;
+        }
+        public void RestoreActions()
+        {
+            PendingActions = ActionsPerTurn;
+        }
+        public bool DoAction(ActionType action, RigidBody target, int intensity, Vector vector)
+        {
+            bool result = false;
+            if (PendingActions > 0)
+            {
+                switch (action)
+                {
+                    case ActionType.Move:
+                        result = this.Move(vector);
+                        break;
+                    case ActionType.Special:
+                        result = this.TrySpecialAbility(target, intensity);
+                        break;
+                    case ActionType.Attack:
+                        result = this.Attack(target);
+                        break;
+                    default:
+                        result = false;
+                        break;
+                }
+                if (result) PendingActions--;
+            }
+            return result;
+        }
     }
-    #endregion
 }

@@ -7,6 +7,6 @@ namespace ItsUmbria.Library.OnlineGame.Abstractions
 {
     interface IAttacking
     {
-        bool Attack(GameObject target);
+        bool Attack(RigidBody target);
     }
 }

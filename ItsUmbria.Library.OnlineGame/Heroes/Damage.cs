@@ -12,6 +12,6 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
         public override double Speed => 6;
 
         public override int Cooldown => throw new System.NotImplementedException();
-        protected override bool DoSpecialAbility(GameObject target, int intensity) => base.Attack(target) & base.Attack(target);
+        protected override bool DoSpecialAbility(RigidBody target, int intensity) => base.Attack(target) & base.Attack(target);
     }
 }

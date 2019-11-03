@@ -12,7 +12,7 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
         public override int MaxHealth => 100;
         public override double Speed => 5;
         public override int Cooldown => 3;
-        protected override bool DoSpecialAbility(GameObject target, int intensity)
+        protected override bool DoSpecialAbility(RigidBody target, int intensity)
         {
             if (target is Hero hero)
             {
