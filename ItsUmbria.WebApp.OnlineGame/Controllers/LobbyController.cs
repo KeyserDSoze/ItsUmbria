@@ -16,7 +16,6 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
     [ApiController]
     public class LobbyController : GameController
     {
-        // Api/Lobby/{action}
         [HttpPost("{lobbyId}")]
         public IActionResult Restart(string lobbyId) => new JsonResult(Lobby.Restart(lobbyId));
         [HttpGet("{lobbyId}")]

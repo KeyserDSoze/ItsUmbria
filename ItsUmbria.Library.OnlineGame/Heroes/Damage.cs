@@ -11,7 +11,7 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
         public override int MaxHealth => 100;
         public override double Speed => 6;
 
-        public override int Cooldown => throw new System.NotImplementedException();
+        public override int Cooldown => 5;
         protected override bool DoSpecialAbility(RigidBody target, int intensity) => base.Attack(target) & base.Attack(target);
     }
 }
