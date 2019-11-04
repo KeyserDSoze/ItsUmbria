@@ -49,6 +49,8 @@ namespace ItsUmbria.Library.OnlineGame.Manager
         }
         public Team CurrenTeam => teams.Peek();
         public List<Hero> Members => teams.SelectMany(x => x.Members.Values).ToList();
+        public Team TeamBlue => teams.Where(x => x.Name == TeamColor.Blue.ToString()).FirstOrDefault();
+        public Team TeamRed => teams.Where(x => x.Name == TeamColor.Red.ToString()).FirstOrDefault();
         public Team GetTeam(TeamColor color) => teams.Where(x => x.Name == color.ToString()).FirstOrDefault();
         public Hero GetHero(string heroName) => teams.SelectMany(x => x.Members.Values).Where(x => x.Name == heroName).FirstOrDefault();
         public Hero JoinTeam(Hero hero, TeamColor color) => !Members.Any(x => x.Name == hero.Name)
