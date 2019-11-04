@@ -15,32 +15,33 @@ namespace ItsUmbria.Library.OnlineGame.Manager
             teams.Enqueue(new Team(TeamColor.Red));
             teams.Enqueue(new Team(TeamColor.Blue));
         }
-        private static Dictionary<string, Lobby> lobby = new Dictionary<string, Lobby>();
+        private static readonly Dictionary<string, Lobby> lobbyes = new Dictionary<string, Lobby>();
         private readonly static object trafficlight = new object();
         private readonly Queue<Team> teams = new Queue<Team>();
+        public static List<Lobby> Lobbies => lobbyes.Values.ToList();
         public static Lobby GetInstance(string id)
         {
-            if (!lobby.ContainsKey(id)) 
+            if (!lobbyes.ContainsKey(id)) 
             {
                 lock (trafficlight)
                 {
-                    if (!lobby.ContainsKey(id))
+                    if (!lobbyes.ContainsKey(id))
                     {
-                        lobby.Add(id, new Lobby(id));
+                        lobbyes.Add(id, new Lobby(id));
                     }
                 }
             }
-            return lobby[id];
+            return lobbyes[id];
         }
         public static Lobby Restart(string id)
         {
-            if (lobby.ContainsKey(id))
+            if (lobbyes.ContainsKey(id))
             {
                 lock (trafficlight)
                 {
-                    if (lobby.ContainsKey(id))
+                    if (lobbyes.ContainsKey(id))
                     {
-                        lobby.Remove(id);
+                        lobbyes.Remove(id);
                     }
                 }
             }

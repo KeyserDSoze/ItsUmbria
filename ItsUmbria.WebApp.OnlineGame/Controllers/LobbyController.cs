@@ -16,10 +16,15 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
     [ApiController]
     public class LobbyController : GameController
     {
+
+        [HttpGet]
+        public IActionResult List(string lobbyId) => new JsonResult(Lobby.Lobbies);
         [HttpPost("{lobbyId}")]
         public IActionResult Restart(string lobbyId) => new JsonResult(Lobby.Restart(lobbyId));
         [HttpGet("{lobbyId}")]
         public IActionResult Status(string lobbyId) => new JsonResult(Lobby.GetInstance(lobbyId));
+        [HttpGet("{lobbyId}/{teamColor=}")]
+        public IActionResult Members(string lobbyId, TeamColor? teamColor) => new JsonResult((teamColor == null ? Lobby.GetInstance(lobbyId).CurrenTeam : Lobby.GetInstance(lobbyId).GetTeam(teamColor.Value)).Members);
         [HttpPost("{lobbyId}")]
         public IActionResult EndTurn(string lobbyId) => new JsonResult(Lobby.GetInstance(lobbyId).EndTurn());
 
@@ -40,9 +45,6 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
         [HttpPatch("{lobbyId}/{teamColor}")]
         public IActionResult ChangeWeapon(string lobbyId, TeamColor teamColor, [FromQuery] WeaponType weaponType, [FromQuery] string heroName) => CheckResult(() => Lobby.GetInstance(lobbyId).GetTeam(teamColor)[heroName].ChooseWeapon(weaponType));
 
-        // Api/Team{action}
-        [HttpGet("{lobbyId}/{teamColor}")]
-        public IActionResult Members(string lobbyId, TeamColor? teamColor) => new JsonResult((teamColor == null ? Lobby.GetInstance(lobbyId).CurrenTeam : Lobby.GetInstance(lobbyId).GetTeam(teamColor.Value)).Members);
         [HttpPut("{lobbyId}/{teamColor}")]
         public IActionResult Frag(string lobbyId, TeamColor teamColor, [FromQuery] int fragCount = 1) => CheckResult(() => Lobby.GetInstance(lobbyId).GetTeam(teamColor).MoreFrags(fragCount));
         [HttpPut("{lobbyId}/{teamColor}")]

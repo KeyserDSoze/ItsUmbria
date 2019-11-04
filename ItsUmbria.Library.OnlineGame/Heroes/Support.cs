@@ -14,7 +14,7 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
         public override int Cooldown => 3;
         protected override bool DoSpecialAbility(RigidBody target, int intensity)
         {
-            if (target is Hero hero)
+            if (target is IHealable hero)
             {
                 hero.GetHealing(50);
                 return true;
