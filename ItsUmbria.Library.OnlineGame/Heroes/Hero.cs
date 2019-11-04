@@ -9,7 +9,21 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
 {
     public abstract class Hero : RigidBody, IAttacking, IMovable, IPrintable, ISpecial, IDamageable, IHealable, ITurnable
     {
-        public Weapon EquippedWeapon => this.Inventory.LastOrDefault().Value;
+        private WeaponType equippedWeaponType = WeaponType.Gun; 
+        private Weapon equippedWeapon = null; 
+        public Weapon EquippedWeapon
+        {
+            get
+            {
+                if (equippedWeapon == null)
+                {
+                    equippedWeapon = Inventory.TryGetValue(equippedWeaponType, out Weapon weapon) 
+                        ? weapon 
+                        : this.Inventory.LastOrDefault().Value;
+                }
+                return equippedWeapon;
+            }
+        } 
         public Hero(string name, HeroClass heroClass) : base(name)
         {
             Health = MaxHealth;
@@ -47,6 +61,20 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
         {
             if (Inventory.ContainsKey(weaponType)) return Inventory.Remove(weaponType);
             else return false;
+        }
+        public bool ChooseWeapon(WeaponType weaponType)
+        {
+            if (Inventory.ContainsKey(weaponType))
+            {
+                equippedWeaponType = weaponType;
+                equippedWeapon = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         // ritorna true se è morto
         public bool GetDamage(int damage)

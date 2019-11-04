@@ -22,6 +22,6 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
         [HttpPut("{teamColor}")]
         public IActionResult Join(TeamColor teamColor, [FromQuery] HeroClass heroClass, [FromQuery] string heroName) => new JsonResult(Lobby.Instance.JoinTeam(HeroFactory.Create(heroClass, heroName), teamColor));
         [HttpDelete("{teamColor}")]
-        public IActionResult Leave(TeamColor teamColor, [FromQuery] string heroName) => new JsonResult(Lobby.Instance.LeaveTeam(heroName, teamColor));
+        public IActionResult Leave(TeamColor teamColor, [FromQuery] string heroName) => CheckResult(() => Lobby.Instance.LeaveTeam(heroName, teamColor));
     }
 }
