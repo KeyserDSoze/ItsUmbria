@@ -2,6 +2,8 @@
 using ItsUmbria.Library.OnlineGame.Enum;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace ItsUmbria.Library.OnlineGame.Weapons
@@ -21,7 +23,7 @@ namespace ItsUmbria.Library.OnlineGame.Weapons
                 case WeaponType.SniperRifle:
                     return new Barret();
                 default:
-                    return null;               
+                    return null;
             }
         }
     }
