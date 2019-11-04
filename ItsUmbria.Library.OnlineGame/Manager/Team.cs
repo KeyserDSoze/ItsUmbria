@@ -13,7 +13,11 @@ namespace ItsUmbria.Library.OnlineGame.Manager
         public Team(TeamColor color) : base(color.ToString()) { }
         public Dictionary<string, Hero> Members = new Dictionary<string, Hero>();
         public int Frags { get; private set; } = 0;
-        public void MoreFrags(int frags) => Frags += frags;
+        public bool MoreFrags(int frags)
+        {
+            Frags += frags;
+            return true;
+        }
         internal Hero Join(Hero hero)
         {
             if (!Members.ContainsKey(hero.Name))

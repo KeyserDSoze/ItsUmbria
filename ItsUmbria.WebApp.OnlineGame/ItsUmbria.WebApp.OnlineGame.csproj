@@ -17,4 +17,9 @@
     <ProjectReference Include="..\ItsUmbria.Library.OnlineGame\ItsUmbria.Library.OnlineGame.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>

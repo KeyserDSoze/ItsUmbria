@@ -10,26 +10,41 @@ namespace ItsUmbria.Library.OnlineGame.Manager
 {
     public class Lobby : GameObject, IPrintable
     {
-        public Lobby() : base(Guid.NewGuid().ToString())
+        public Lobby(string id) : base(id)
         {
             teams.Enqueue(new Team(TeamColor.Red));
             teams.Enqueue(new Team(TeamColor.Blue));
         }
-        private static Lobby lobby = null;
+        private static Dictionary<string, Lobby> lobby = new Dictionary<string, Lobby>();
         private readonly static object trafficlight = new object();
         private readonly Queue<Team> teams = new Queue<Team>();
-        public static Lobby Instance
+        public static Lobby GetInstance(string id)
         {
-            get
+            if (!lobby.ContainsKey(id)) 
             {
-                if (lobby == null) lock (trafficlight) lobby = new Lobby();
-                return lobby;
+                lock (trafficlight)
+                {
+                    if (!lobby.ContainsKey(id))
+                    {
+                        lobby.Add(id, new Lobby(id));
+                    }
+                }
             }
+            return lobby[id];
         }
-        public static Lobby Restart()
+        public static Lobby Restart(string id)
         {
-            lobby = null;
-            return Lobby.Instance;
+            if (lobby.ContainsKey(id))
+            {
+                lock (trafficlight)
+                {
+                    if (lobby.ContainsKey(id))
+                    {
+                        lobby.Remove(id);
+                    }
+                }
+            }
+            return Lobby.GetInstance(id);
         }
         public Team CurrenTeam => teams.Peek();
         public List<Hero> Members => teams.SelectMany(x => x.Members.Values).ToList();
