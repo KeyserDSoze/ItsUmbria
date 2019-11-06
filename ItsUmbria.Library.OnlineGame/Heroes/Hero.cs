@@ -156,5 +156,6 @@ namespace ItsUmbria.Library.OnlineGame.Heroes
             }
             return result;
         }
+        public bool ChangeName(string name) => Name = name;
     }
 }

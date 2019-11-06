@@ -131,7 +131,7 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
         /// <param name="heroClass">hero Class</param>
         /// <returns>an object that models an hero class</returns>
         [HttpGet("{heroClass}")]
-        public IActionResult HeroStats(HeroClass heroClass) => new JsonResult(HeroFactory.Create(heroClass, heroClass.ToString()));
+        public IActionResult ClassStats(HeroClass heroClass) => new JsonResult(HeroFactory.Create(heroClass, heroClass.ToString()));
         /// <summary>
         /// Adds some frags to the team
         /// </summary>
