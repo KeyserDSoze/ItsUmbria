@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ItsUmbria.WebApp.OnlineGame.Controllers
 {
-    [Route("api/lobby/[action]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class LobbyController : GameController
     {
@@ -23,6 +23,13 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
         [HttpGet]
         public IActionResult List() => new JsonResult(Lobby.Lobbies);
         /// <summary>
+        /// Gets the status of the Lobby
+        /// </summary>
+        /// <param name="lobbyId">Lobby identifier</param>
+        /// <returns>The jsonized <see cref="Lobby"/> object that identifies the restarted Lobby</returns>
+        [HttpGet("{lobbyId}")]
+        public IActionResult Status(string lobbyId) => new JsonResult(Lobby.GetInstance(lobbyId));
+        /// <summary>
         /// Reset the lobby status. All changes will be lost.
         /// </summary>
         /// <param name="lobbyId">Lobby identifier</param>
@@ -30,12 +37,12 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
         [HttpGet("{lobbyId}")]
         public IActionResult Restart(string lobbyId) => new JsonResult(Lobby.Restart(lobbyId));
         /// <summary>
-        /// Gets the status of the Lobby
+        /// Delete the lobby, if exists.
         /// </summary>
         /// <param name="lobbyId">Lobby identifier</param>
-        /// <returns>The jsonized <see cref="Lobby"/> object that identifies the restarted Lobby</returns>
-        [HttpGet("{lobbyId}")]
-        public IActionResult Status(string lobbyId) => new JsonResult(Lobby.GetInstance(lobbyId));
+        /// <returns>true if the <see cref="Lobby"/> object was exists and was deleted. False otherwise</returns>
+        [HttpDelete("{lobbyId}")]
+        public IActionResult Delete(string lobbyId) => CheckResult(() => Lobby.Delete(lobbyId));
         /// <summary>
         /// Get the members of the Lobby
         /// </summary>
@@ -115,9 +122,16 @@ namespace ItsUmbria.WebApp.OnlineGame.Controllers
         /// Gets stats of a weapon type
         /// </summary>
         /// <param name="weaponType">weapon Type</param>
-        /// <returns></returns>
+        /// <returns>an object that models the weapon Type</returns>
         [HttpGet("{weaponType}")]
         public IActionResult WeaponStats(WeaponType weaponType) => new JsonResult(WeaponFactory.GetWeapon(weaponType));
+        /// <summary>
+        /// Get stats of an hero class
+        /// </summary>
+        /// <param name="heroClass">hero Class</param>
+        /// <returns>an object that models an hero class</returns>
+        [HttpGet("{heroClass}")]
+        public IActionResult HeroStats(HeroClass heroClass) => new JsonResult(HeroFactory.Create(heroClass, heroClass.ToString()));
         /// <summary>
         /// Adds some frags to the team
         /// </summary>

@@ -35,6 +35,11 @@ namespace ItsUmbria.Library.OnlineGame.Manager
         }
         public static Lobby Restart(string id)
         {
+            Lobby.Delete(id);
+            return Lobby.GetInstance(id);
+        }
+        public static bool Delete(string id)
+        {
             if (lobbyes.ContainsKey(id))
             {
                 lock (trafficlight)
@@ -42,10 +47,11 @@ namespace ItsUmbria.Library.OnlineGame.Manager
                     if (lobbyes.ContainsKey(id))
                     {
                         lobbyes.Remove(id);
+                        return true;
                     }
                 }
             }
-            return Lobby.GetInstance(id);
+            return false;
         }
         public Team CurrenTeam => teams.Peek();
         public List<Hero> Members => teams.SelectMany(x => x.Members.Values).ToList();
